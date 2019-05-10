@@ -9,7 +9,7 @@ public class MyFirstProgram {
 
 
     Square s = new Square(5);
-    System.out.println("square area with sides " + s.l + " = " + s.area());
+    System.out.println("square area with sides " + s.len + " = " + s.area());
 
     Rectangle r = new Rectangle(4,6);
     System.out.println("rectangle area with sides " + r.a + " and " + r.b + " = " + r.area());

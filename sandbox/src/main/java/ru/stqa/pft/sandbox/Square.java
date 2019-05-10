@@ -1,8 +1,7 @@
 package ru.stqa.pft.sandbox;
 
 public class Square {
-  public double l;
-  private double len;
+  public double len;
 
   public Square(double len){
 
@@ -10,6 +9,6 @@ public class Square {
   }
 
   public  double area() {
-    return this.l * this.l;
+    return this.len * this.len;
   }
 }
