@@ -8,4 +8,8 @@ public class Square {
 
     this.len = len;
   }
+
+  public  double area() {
+    return this.l * this.l;
+  }
 }

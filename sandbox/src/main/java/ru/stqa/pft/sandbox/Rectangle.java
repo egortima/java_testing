@@ -11,4 +11,9 @@ public class Rectangle {
   }
 
 
+
+  public  double area() {
+    return this.a * this.b;
+  }
+
 }
