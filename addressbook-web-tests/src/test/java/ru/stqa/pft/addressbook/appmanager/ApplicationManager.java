@@ -2,7 +2,6 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.concurrent.TimeUnit;
 
@@ -10,43 +9,36 @@ import static org.testng.Assert.fail;
 
 public class ApplicationManager {
 
-  public WebDriver driver;
-  public StringBuffer verificationErrors = new StringBuffer();
-  private boolean acceptNextAlert = true;
+  protected WebDriver driver;
 
-  public void login(String username, String password) {
-    driver.findElement(By.name("user")).click();
-    driver.findElement(By.name("user")).clear();
-    driver.findElement(By.name("user")).sendKeys(username);
-    driver.findElement(By.name("pass")).clear();
-    driver.findElement(By.name("pass")).sendKeys(password);
-    driver.findElement(By.id("LoginForm")).submit();
+  private SessionHelper sessionHelper;
+  private NavigationHelper navigationHelper;
+  private GroupHelper groupHelper;
+
+  public void init() {
+    driver = new FirefoxDriver();
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    driver.get("http://addressbook/");
+    groupHelper = new GroupHelper(driver);
+    navigationHelper = new NavigationHelper(driver);
+    sessionHelper = new SessionHelper(driver);
+    sessionHelper.login("admin", "secret");
   }
 
-  public void returnToGroupPage(String s) {
-    driver.findElement(By.linkText(s)).click();
+  public void stop() {
+    driver.quit();
+    String verificationErrorString = groupHelper.verificationErrors.toString();
+    if (!"".equals(verificationErrorString)) {
+      fail(verificationErrorString);
+    }
   }
 
-  public void submitGroupCreation(String submit) {
-    driver.findElement(By.name(submit)).click();
+  public GroupHelper getGroupHelper() {
+    return groupHelper;
   }
 
-  public void fillGroupForm(GroupData groupData) {
-    driver.findElement(By.name("group_name")).click();
-    driver.findElement(By.name("group_name")).clear();
-    driver.findElement(By.name("group_name")).sendKeys(groupData.getName());
-    driver.findElement(By.name("group_header")).clear();
-    driver.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
-    driver.findElement(By.name("group_footer")).clear();
-    driver.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
-  }
-
-  public void initGroupCreation(String s) {
-    driver.findElement(By.name(s)).click();
-  }
-
-  public void gotoGroupPage(String groups) {
-    driver.findElement(By.linkText(groups)).click();
+  public NavigationHelper getNavigationHelper() {
+    return navigationHelper;
   }
 
   private boolean isElementPresent(By by) {
@@ -71,38 +63,14 @@ public class ApplicationManager {
     try {
       Alert alert = driver.switchTo().alert();
       String alertText = alert.getText();
-      if (acceptNextAlert) {
+      if (groupHelper.acceptNextAlert) {
         alert.accept();
       } else {
         alert.dismiss();
       }
       return alertText;
     } finally {
-      acceptNextAlert = true;
+      groupHelper.acceptNextAlert = true;
     }
   }
-
-  public void deleteSelectedGroups(String delete) {
-    driver.findElement(By.name(delete)).click();
-  }
-
-  public void selectGroup(String s) {
-    driver.findElement(By.name(s)).click();
-  }
-
-  public void init() {
-    driver = new FirefoxDriver();
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    driver.get("http://addressbook/");
-    login("admin", "secret");
-  }
-
-  public void stop() {
-    driver.quit();
-    String verificationErrorString = verificationErrors.toString();
-    if (!"".equals(verificationErrorString)) {
-      fail(verificationErrorString);
-    }
-  }
-
 }
