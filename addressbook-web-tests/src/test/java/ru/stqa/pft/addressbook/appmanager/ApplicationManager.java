@@ -1,7 +1,13 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.opera.OperaOptions;
+import org.openqa.selenium.remote.BrowserType;
 
 import java.util.concurrent.TimeUnit;
 
@@ -14,9 +20,37 @@ public class ApplicationManager {
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
+  private String browser;
+
+  public ApplicationManager(String browser) {
+    this.browser = browser;
+  }
 
   public void init() {
-    driver = new FirefoxDriver();
+
+    if (browser.equals(BrowserType.FIREFOX)) {
+      driver = new FirefoxDriver();
+
+    } else if (browser.equals(BrowserType.GOOGLECHROME)) {
+      driver = new ChromeDriver();
+
+    } else if (browser.equals(BrowserType.IE)) {
+
+      //    System.setProperty("webdriver.ie.driver", "C:\\Tools\\IEDriverServer.exe");
+      driver = new InternetExplorerDriver();
+      driver.manage().window().maximize();
+      //     driver.manage().window().fullscreen();
+
+    } else if (browser.equals(BrowserType.EDGE)) {
+      driver = new EdgeDriver();
+
+    } else if (browser.equals(BrowserType.OPERA_BLINK)) {
+      OperaOptions options = new OperaOptions();
+      options.setBinary("C:\\Program Files\\60.0.3255.84\\opera.exe");
+      System.setProperty("webdriver.opera.driver", "C:\\Tools\\operadriver.exe");
+      driver = new OperaDriver(options);
+    }
+
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     driver.get("http://addressbook/");
     groupHelper = new GroupHelper(driver);
