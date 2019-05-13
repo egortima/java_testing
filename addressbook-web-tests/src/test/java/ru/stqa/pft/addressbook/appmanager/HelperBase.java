@@ -27,15 +27,6 @@ public class HelperBase {
      }
     }
 
-  public boolean isElementPresent(By by) {
-    try {
-      driver.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
-
   public boolean isAlertPresent() {
     try {
       driver.switchTo().alert();
@@ -45,4 +36,12 @@ public class HelperBase {
     }
   }
 
+  protected boolean isElementPresent(By locator) {
+    try {
+      driver.findElement(locator);
+      return true;
+    }catch (NoSuchElementException ex){
+      return false;
+    }
+  }
 }

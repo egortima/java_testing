@@ -37,9 +37,9 @@ public class ApplicationManager {
 
     } else if (browser.equals(BrowserType.IE)) {
 
-      //    System.setProperty("webdriver.ie.driver", "C:\\Tools\\IEDriverServer.exe");
       driver = new InternetExplorerDriver();
       driver.manage().window().maximize();
+      //    System.setProperty("webdriver.ie.driver", "C:\\Tools\\IEDriverServer.exe");
       //     driver.manage().window().fullscreen();
 
     } else if (browser.equals(BrowserType.EDGE)) {
@@ -52,7 +52,7 @@ public class ApplicationManager {
       driver = new OperaDriver(options);
     }
 
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     driver.get("http://addressbook/");
     groupHelper = new GroupHelper(driver);
     navigationHelper = new NavigationHelper(driver);
