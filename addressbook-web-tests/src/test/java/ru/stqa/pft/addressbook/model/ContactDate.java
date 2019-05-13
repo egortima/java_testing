@@ -13,7 +13,7 @@ public class ContactDate {
       return firstname;
     }
 
-    public String geеLastname() {
+    public String getLastname() {
       return lastname;
     }
 

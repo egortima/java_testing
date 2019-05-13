@@ -27,7 +27,7 @@ public class ContactHelper extends HelperBase {
 
   public void fillContactForm(ContactDate contactDate) {
     type(By.name("firstname"), contactDate.getFirstname());
-    type(By.name("lastname"), contactDate.geеLastname());
+    type(By.name("lastname"), contactDate.getLastname());
   }
 
   public void returnToHomePage(){

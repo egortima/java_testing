@@ -20,7 +20,7 @@ public class ApplicationManager {
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
-  private  ContactHelper contactHelper;
+  private ContactHelper contactHelper;
   private String browser;
 
   public ApplicationManager(String browser) {
