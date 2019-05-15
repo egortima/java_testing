@@ -30,35 +30,38 @@ public class ApplicationManager {
   public void init() {
 
     if (browser.equals(BrowserType.FIREFOX)) {
+
       driver = new FirefoxDriver();
 
     } else if (browser.equals(BrowserType.GOOGLECHROME)) {
+
       driver = new ChromeDriver();
 
     } else if (browser.equals(BrowserType.IE)) {
 
       driver = new InternetExplorerDriver();
       driver.manage().window().maximize();
-      //    System.setProperty("webdriver.ie.driver", "C:\\Tools\\IEDriverServer.exe");
-      //     driver.manage().window().fullscreen();
 
     } else if (browser.equals(BrowserType.EDGE)) {
+
       driver = new EdgeDriver();
 
     } else if (browser.equals(BrowserType.OPERA_BLINK)) {
+
       OperaOptions options = new OperaOptions();
       options.setBinary("C:\\Program Files\\60.0.3255.84\\opera.exe");
       System.setProperty("webdriver.opera.driver", "C:\\Tools\\operadriver.exe");
       driver = new OperaDriver(options);
+
     }
 
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     driver.get("http://addressbook/");
+
     groupHelper = new GroupHelper(driver);
     navigationHelper = new NavigationHelper(driver);
     sessionHelper = new SessionHelper(driver);
     contactHelper = new ContactHelper(driver);
-
     sessionHelper.login("admin", "secret");
   }
 
