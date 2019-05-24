@@ -1,6 +1,5 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
@@ -25,5 +24,4 @@ public class GroupDeletionTests extends TestBase {
     before.remove(before.size() - 1);
       Assert.assertEquals(before, after);
   }
-
 }
