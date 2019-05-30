@@ -5,7 +5,7 @@ import ru.stqa.pft.addressbook.model.ContactDate;
 
 public class ContactModificationTests extends TestBase {
 
-  @Test
+  @Test (enabled = false)
   public void testContactModification() {
     app.getNavigationHelper().gotoHomePage("home");
     app.getContactHelper().initContactModification();
