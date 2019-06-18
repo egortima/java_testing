@@ -7,4 +7,5 @@ repositories {
 dependencies {
     testCompile 'org.testng:testng:6.10'
     implementation 'org.seleniumhq.selenium:selenium-java:3.8.0'
+    implementation 'org.hamcrest:hamcrest:2.1'
 }
