@@ -1,7 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.ContactDate;
+import ru.stqa.pft.addressbook.model.ContactData;
 
 public class ContactCreationTests extends TestBase {
 
@@ -10,7 +10,7 @@ public class ContactCreationTests extends TestBase {
   public void testContactCreation() {
     app.goTo().gotoHomePage("home");
     app.getContactHelper().initContactCreation();
-    app.getContactHelper().fillContactForm(new ContactDate("test_name","test_surname", "test1"), true);
+    app.getContactHelper().fillContactForm(new ContactData("test_name","test_surname", "test1"), true);
     app.getContactHelper().submitContactCreation();
     app.getContactHelper().returnToHomePage();
   }
