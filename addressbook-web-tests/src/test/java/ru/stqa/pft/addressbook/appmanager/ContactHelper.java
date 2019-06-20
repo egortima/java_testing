@@ -16,19 +16,19 @@ public class ContactHelper extends HelperBase {
     super(driver);
   }
 
-  public void initContactCreation(){
+  public void initContactCreation() {
     click(By.linkText("add new"));
   }
 
-  public void submitContactCreation(){
+  public void submitContactCreation() {
     click(By.name("submit"));
   }
 
-  public void initContactModification(){
+  public void initContactModification() {
     click(By.cssSelector("#maintable > tbody > tr:nth-child(2) > td:nth-child(8) > a > img"));
   }
 
-  public void submitContactModification(){
+  public void submitContactModification() {
     click(By.name("update"));
   }
 
@@ -36,14 +36,14 @@ public class ContactHelper extends HelperBase {
     type(By.name("firstname"), contactDate.getFirstname());
     type(By.name("lastname"), contactDate.getLastname());
 
-    if(creation){
+    if (creation) {
       new Select(driver.findElement(By.name("new_group"))).selectByVisibleText(contactDate.getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
   }
 
-  public void returnToHomePage(){
+  public void returnToHomePage() {
     click(By.linkText("home page"));
   }
 
@@ -62,7 +62,7 @@ public class ContactHelper extends HelperBase {
     return contacts;
   }
 
-  public ContactData infoFormEditForm(ContactData contact){
+  public ContactData infoFormEditForm(ContactData contact) {
     initContactModificationById(contact.getId());
     String firstname = driver.findElement(By.name("firstname")).getAttribute("value");
     String lastname = driver.findElement(By.name("lastname")).getAttribute("value");
@@ -75,11 +75,17 @@ public class ContactHelper extends HelperBase {
   }
 
 
-  private void initContactModificationById(int id){
-    WebElement checkbox = driver.findElement(By.cssSelector(String.format("input[value='%s']",id)));
+  private void initContactModificationById(int id) {
+    WebElement checkbox = driver.findElement(By.cssSelector(String.format("input[value='%s']", id)));
     WebElement row = checkbox.findElement(By.xpath("./../.."));
     List<WebElement> cells = row.findElements(By.tagName("td"));
     cells.get(7).findElement(By.tagName("a")).click();
+
+
+    //driver.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a", id))).click();
+    //driver.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a", id))).click();
+    //driver.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
+
   }
 
 }
